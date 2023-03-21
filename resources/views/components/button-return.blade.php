@@ -1,0 +1,1 @@
+<a class="btn btn-warning btn-sm px-4 mb-4" href="{{route('contact.index')}}"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
