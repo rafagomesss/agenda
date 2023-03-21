@@ -3,7 +3,9 @@ USE test;
 
 CREATE TABLE IF NOT EXISTS contacts(
 	id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+    email VARCHAR(200),
+    birtdate DATE,
+    cpf VARCHAR(15),
+    cellphone VARCHAR(17) NOT NULL,
     PRIMARY KEY(id)
 );
-
-DESC contacts;
