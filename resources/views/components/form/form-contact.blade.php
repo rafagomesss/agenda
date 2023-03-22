@@ -1,29 +1,34 @@
 <div class="row justify-content-center">
     <div class="col-6">
         <x-button-return/>
-        <form method="post" action="{{ route('contact.store') }}">
+        <form method="post" action="{{ $action ?? '' }}">
             @csrf
+            {{ $slot }}
             <x-form.text_input
                 name="name"
                 label="Nome"
                 required="required"
                 placeholder="Digite seu nome completo"
+                value="{{ $contact->name ?? null }}"
             />
             <x-form.text_input
                 name="email"
                 label="E-mail"
                 placeholder="Digite seu e-mail"
+                value="{{ $contact->email ?? null }}"
             />
             <x-form.text_input
                 name="birthdate"
                 label="Data de Nascimento"
                 placeholder=""
+                value="{{ $contact->birthdate ?? null }}"
                 type="date"
             />
             <x-form.text_input
                 name="cpf"
                 label="CPF"
                 placeholder="Digite seu CPF"
+                value="{{ $contact->cpf ?? null }}"
                 class="cpf"
             />
             <x-form.text_input
@@ -31,6 +36,7 @@
                 label="Celular"
                 required="required"
                 placeholder="(99) 9 9999-9999"
+                value="{{ $contact->cellphone ?? null }}"
                 class="cellphone"
             />
             <div class="d-grid gap-2">

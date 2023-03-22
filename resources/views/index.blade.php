@@ -3,6 +3,14 @@
 
     <h2 class="text-center mb-5">Contatos</h2>
 
+    @if ($errors->any())
+        <x-alert type="danger">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </x-alert>
+    @endif
+
     <div class="row mb-2">
         <div class="col-2"></div>
         <div class="col-8 d-flex justify-content-end">

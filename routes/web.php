@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     HomeController,
     ContactController,
-    LoginController
+    AuthController
 };
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +17,20 @@ use App\Http\Controllers\{
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('contact.index');
-Route::get('/contact/cadastrar', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-Route::get('/contact/editar', [ContactController::class, 'edit'])->name('contact.edit');
-Route::get('/contact/delete', [ContactController::class, 'delete'])->name('contact.delete');
-Route::post('/contact/update', [ContactController::class, 'update'])->name('contact.update');
+Route::controller(ContactController::class)->middleware(['auth'])->group(function () {
+    Route::get('/', 'index')->name('contact.index');
+    Route::get('/contact/cadastrar', 'create')->name('contact.create');
+    Route::post('/contact', 'store')->name('contact.store');
+    Route::get('/contact/editar', 'edit')->name('contact.edit');
+    Route::get('/contact/excluir', 'delete')->name('contact.delete');
+    Route::post('/contact/update', 'update')->name('contact.update');
+});
 
-Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'index')->name('login');
+    Route::post('/login', 'login')->name('auth.access');
+
+    Route::get('/login/registrar', 'register')->name('auth.register');
+    Route::post('/login/create', 'create')->name('auth.create');
+    ROute::get('/logout', 'logout')->name('auth.logout');
+});
